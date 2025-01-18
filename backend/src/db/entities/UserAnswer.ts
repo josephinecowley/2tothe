@@ -14,5 +14,5 @@ export class UserAnswer extends BaseEntity {
   user!: User;
 
   @Column()
-  answer!: string;
+  answer!: "A" | "B";
 }
