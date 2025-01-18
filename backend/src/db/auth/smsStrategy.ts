@@ -21,13 +21,21 @@ export const useSmsStrategy = () => {
           .verificationChecks.create({ to: phoneNumber, code });
 
         if (verificationCheck.status === "approved") {
-          // OTP approved, find or create a user
+          // OTP approved
+          // First, check if a full User exists
           const foundUser = await User.findOne({ where: { phoneNumber } });
-          if (!foundUser) {
-            const newUser = NewUser.create({ phoneNumber });
-            await newUser.save();
+          if (foundUser) {
+            return done(null, foundUser);
           }
-          return done(null, foundUser);
+          // Then, check if a NewUser has been created (this means the user has not completed the onboarding process)
+          const foundNewUser = await NewUser.findOne({ where: { phoneNumber } });
+          if (foundNewUser) {
+            return done(null, foundNewUser);
+          }
+          // If no User or NewUser exists, create a new NewUser
+          const newUser = NewUser.create({ phoneNumber });
+          await newUser.save();
+          return done(null, newUser);
         } else {
           return done({ message: InvalidOTPMessage }, false);
         }
@@ -46,7 +54,7 @@ export const authenticateSMS = (
   passport.authenticate("sms", (err: Error, user: IUserWithID, info?: { message?: string }) => {
     // TODO: should we handle these the same?
     if (err || !user) {
-      console.error("Authentication error:", err, info);
+      console.error("Authentication error:", err, user, info);
       if (err?.message === InvalidOTPMessage) {
         return reject(new ResponseError(401, ErrorCode.Unauthorized, InvalidOTPMessage));
       }
