@@ -8,11 +8,12 @@ import dataSource from "./db/dataSource";
 import express from "express";
 import cors from "cors";
 
+import { useSmsStrategy } from "./db/auth/smsStrategy";
+import "./db/auth/passportSerialize";
+
 import HelloWorldRouter from "./routes/HelloWorld";
 import UserSettingsRouter from "./routes/UserSettings";
 import AuthRouter from "./routes/Auth";
-
-import { useSmsStrategy } from "./db/auth/smsStrategy";
 
 (async function () {
   await dataSource.initialize();
