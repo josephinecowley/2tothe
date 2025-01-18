@@ -8,16 +8,6 @@ export type Route<Req, Res> = {
   req: z.ZodType<Req>;
   res: z.ZodType<Res>;
 };
-export type StreamRoute<Req> = {
-  path: string;
-  method?: Methods;
-  req: z.ZodType<Req>;
-};
-export type BufferRoute<Req> = {
-  path: string;
-  method?: Methods;
-  req: z.ZodType<Req>;
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Req<T extends Route<any, any>> =
