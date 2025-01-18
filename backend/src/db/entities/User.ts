@@ -15,4 +15,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => UserAnswer, (a) => a.user)
   answers!: UserAnswer[];
+
+  @Column({ unique: true })
+  phoneNumber!: string;
 }
