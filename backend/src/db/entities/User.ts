@@ -8,10 +8,12 @@ export class User extends BaseEntity implements IUserWithID {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  @Column()
+  // TODO: Make non-nullable
+  @Column({ nullable: true })
   nickname!: string;
 
-  @ManyToOne(() => Place)
+  // TODO: Make non-nullable
+  @ManyToOne(() => Place, { nullable: true })
   place!: Place;
 
   @OneToMany(() => UserAnswer, (a) => a.user)
