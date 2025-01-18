@@ -4,6 +4,7 @@ import { Strategy as CustomStrategy } from "passport-custom";
 import { client } from "./twilioClient";
 import { IUserWithID } from "./extendExpress";
 import { ErrorCode, ResponseError } from "@2tothe/shared";
+import { NewUser } from "../entities";
 
 export const InvalidOTPMessage = "Invalid OTP";
 
@@ -21,10 +22,10 @@ export const useSmsStrategy = () => {
 
         if (verificationCheck.status === "approved") {
           // OTP approved, find or create a user
-          let foundUser = await User.findOne({ where: { phoneNumber } });
+          const foundUser = await User.findOne({ where: { phoneNumber } });
           if (!foundUser) {
-            foundUser = User.create({ phoneNumber });
-            await foundUser.save();
+            const newUser = NewUser.create({ phoneNumber });
+            await newUser.save();
           }
           return done(null, foundUser);
         } else {

@@ -1,6 +1,7 @@
 import passport from "passport";
 import { User } from "../entities/User";
 import "./extendExpress";
+import { NewUser } from "../entities";
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -8,8 +9,8 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id: string, done) => {
   try {
-    const foundUser = await User.findOne({ where: { id } });
-    done(null, foundUser);
+    const user = (await User.findOne({ where: { id } })) || (await NewUser.findOne({ where: { id } }));
+    done(null, user);
   } catch (err) {
     done(err);
   }

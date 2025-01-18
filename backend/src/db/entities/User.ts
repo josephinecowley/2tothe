@@ -8,12 +8,10 @@ export class User extends BaseEntity implements IUserWithID {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  // TODO: Make non-nullable
-  @Column({ nullable: true })
+  @Column()
   nickname!: string;
 
-  // TODO: Make non-nullable
-  @ManyToOne(() => Place, { nullable: true })
+  @ManyToOne(() => Place)
   place!: Place;
 
   @OneToMany(() => UserAnswer, (a) => a.user)
@@ -21,4 +19,6 @@ export class User extends BaseEntity implements IUserWithID {
 
   @Column({ unique: true })
   phoneNumber!: string;
+
+  isNewUser: false = false;
 }
