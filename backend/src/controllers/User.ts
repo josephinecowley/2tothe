@@ -35,7 +35,7 @@ export async function setUserPlace(userID: User["id"], newPlaceID: Place["id"]) 
   await user.save();
 
   return {
-    succes: true,
+    success: true,
     message: `User place was updated to ${newPlace.placeName}`,
   };
 }

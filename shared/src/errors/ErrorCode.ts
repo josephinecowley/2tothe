@@ -3,4 +3,5 @@ export enum ErrorCode {
   MissingField = "E_MISSING_FIELD",
   InternalError = "E_INTERNAL_ERROR",
   Unauthorized = "E_UNAUTHORIZED",
+  NotFound = "E_NOT_FOUND",
 }
