@@ -17,7 +17,11 @@ applyRoute(router, Routes.Auth.sendSMSCodeRoute).use(async (body) => {
 });
 
 applyRoute(router, Routes.Auth.verifySMSCodeRoute, passport.authenticate("sms")).use(async (body, req) => {
-  return { user: req.user };
+  const user = req.user;
+  if (!user) {
+    throw new ResponseError(401, ErrorCode.Unauthorized, "Unauthorized");
+  }
+  return { user };
 });
 
 export default router;
