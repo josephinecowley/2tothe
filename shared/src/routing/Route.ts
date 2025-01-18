@@ -2,8 +2,6 @@ import { z } from "zod";
 // From @types/express-serve-static-core/index.d.ts:IRouterMatcher
 type Methods = "all" | "get" | "post" | "put" | "delete" | "patch" | "options" | "head";
 
-export type ZodRes<Res> = z.ZodType<Res>;
-
 export type Route<Req, Res> = {
   path: string;
   method?: Methods;
