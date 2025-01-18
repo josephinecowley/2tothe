@@ -1,5 +1,6 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Place } from "./Place";
+import { UserAnswer } from "./UserAnswer";
 
 @Entity()
 export class User extends BaseEntity {
@@ -11,4 +12,7 @@ export class User extends BaseEntity {
 
   @ManyToOne(() => Place)
   place!: Place;
+
+  @OneToMany(() => UserAnswer, (a) => a.user)
+  answers!: UserAnswer[];
 }

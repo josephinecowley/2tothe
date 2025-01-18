@@ -10,7 +10,7 @@ export class UserAnswer extends BaseEntity {
   @ManyToOne(() => Question)
   question!: Question;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (u) => u.answers)
   user!: User;
 
   @Column()
