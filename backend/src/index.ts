@@ -8,7 +8,7 @@ import cors from "cors";
 
 import { stateUserPlace } from "./controllers/User";
 import HelloWorldRouter from "./routes/HelloWorld";
-import SetNewPlaceRouter from "./routes/UserSettings";
+import UserSettingsRouter from "./routes/UserSettings";
 
 (async function () {
   await dataSource.initialize();
@@ -38,7 +38,7 @@ import SetNewPlaceRouter from "./routes/UserSettings";
   });
 
   app.use(HelloWorldRouter);
-  app.use(SetNewPlaceRouter);
+  app.use(UserSettingsRouter);
 
   const PORT = Number(process.env.PORT) || 8080;
   app.listen(PORT, () => {
