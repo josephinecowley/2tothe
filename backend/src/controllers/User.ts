@@ -1,12 +1,15 @@
 import { ErrorCode } from "@2tothe/shared";
-import { Place, User } from "../db/entities";
-
-async function findUserByNickname(nickname: string) {
+import { Place, Question, User, UserAnswer } from "../db/entities";
+export async function findUserByNickname(nickname: string) {
   return await User.findOne({ where: { nickname }, relations: { place: true } });
 }
 
 async function findUserByID(userID: User["id"]) {
   return await User.findOne({ where: { id: userID }, relations: { place: true } });
+}
+
+async function findQuestionByID(questionID: Question["id"]) {
+  return await User.findOne({ where: { id: questionID } });
 }
 
 export async function setUserPlace(userID: User["id"], newPlaceID: Place["id"]) {
@@ -48,5 +51,35 @@ export async function setUserNickname(userID: User["id"], newNickname: User["nic
 
   return {
     message: `User place was updated to ${user.nickname}`,
+  };
+}
+
+export async function setUserAnswer(answer: UserAnswer["answer"], questionID: Question["id"], userID: User["id"]) {
+  const user = await findUserByID(userID);
+  if (!user) {
+    return {
+      errorCode: ErrorCode.NotFound,
+      message: `No user has the id: ${userID}`,
+    };
+  }
+
+  const question = await findQuestionByID(questionID);
+  if (!question) {
+    return {
+      errorCode: ErrorCode.NotFound,
+      message: `No question has the id: ${questionID}`,
+    };
+  }
+
+  const newUserAnswer = UserAnswer.create({
+    answer,
+    question,
+    user,
+  });
+
+  await newUserAnswer.save();
+
+  return {
+    message: `User answer was updated to ${newUserAnswer.answer}`,
   };
 }
