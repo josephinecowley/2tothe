@@ -12,7 +12,7 @@ export const useSmsStrategy = () => {
       try {
         // Use Twilio Verify to check the OTP
         const verificationCheck = await client.verify.v2
-          .services("YOUR_TWILIO_VERIFY_SERVICE_SID")
+          .services(process.env.TWILIO_VERIFY_SERVICE_SID!)
           .verificationChecks.create({ to: phoneNumber, code });
 
         if (verificationCheck.status === "approved") {
