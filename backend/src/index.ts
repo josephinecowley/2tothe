@@ -10,6 +10,7 @@ import cors from "cors";
 
 import HelloWorldRouter from "./routes/HelloWorld";
 import UserSettingsRouter from "./routes/UserSettings";
+import AuthRouter from "./routes/Auth";
 
 import { useSmsStrategy } from "./db/auth/smsStrategy";
 
@@ -55,6 +56,7 @@ import { useSmsStrategy } from "./db/auth/smsStrategy";
 
   app.use(HelloWorldRouter);
   app.use(UserSettingsRouter);
+  app.use(AuthRouter);
 
   const PORT = Number(process.env.PORT) || 8080;
   app.listen(PORT, () => {
