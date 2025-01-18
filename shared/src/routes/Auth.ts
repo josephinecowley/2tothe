@@ -14,3 +14,10 @@ export const verifySMSCodeRoute: Route<{}, { user: { id: string } }> = {
   req: z.object({}),
   res: z.object({ user: z.object({ id: z.string() }) }),
 };
+
+export const getIDRoute: Route<{}, { id: string }> = {
+  path: "/auth/get-id",
+  method: "get",
+  req: z.object({}),
+  res: z.object({ id: z.string() }),
+};

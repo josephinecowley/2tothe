@@ -24,4 +24,11 @@ applyRoute(router, Routes.Auth.verifySMSCodeRoute).use(async (_, req) => {
   });
 });
 
+applyRoute(router, Routes.Auth.getIDRoute).use(async (_, req) => {
+  if (!req.user) {
+    throw new ResponseError(401, ErrorCode.Unauthorized, "User not found");
+  }
+  return { id: req.user.id };
+});
+
 export default router;
