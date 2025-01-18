@@ -1,1 +1,2 @@
-export { Location } from "./Location";
+export { Place } from "./Place";
+export { User } from "./User";
