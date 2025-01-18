@@ -18,7 +18,11 @@ const handleError = (e: ResponseError | any, res: Response<IResponseError>) => {
   console.error(isZodError ? fmtError(e) : e);
 
   if (isResponseError) {
-    return res.status(e.status).json(e);
+    return res.status(e.status).json({
+      status: e.status,
+      message: e.message,
+      errorCode: e.errorCode,
+    });
   }
   if (isZodError) return res.status(400).json({ status: 400, errorCode: ErrorCode.MissingField, message: fmtError(e) });
 
