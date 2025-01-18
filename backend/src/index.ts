@@ -11,8 +11,13 @@ import cors from "cors";
 import HelloWorldRouter from "./routes/HelloWorld";
 import UserSettingsRouter from "./routes/UserSettings";
 
+import { useSmsStrategy } from "./db/auth/smsStrategy";
+
 (async function () {
   await dataSource.initialize();
+
+  useSmsStrategy();
+
   const app = express();
 
   const FRONTEND_URL = process.env.FRONTEND_URL;
