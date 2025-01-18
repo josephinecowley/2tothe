@@ -6,7 +6,6 @@ import dataSource from "./db/dataSource";
 import express from "express";
 import cors from "cors";
 
-import { stateUserPlace } from "./controllers/User";
 import HelloWorldRouter from "./routes/HelloWorld";
 import UserSettingsRouter from "./routes/UserSettings";
 
@@ -31,10 +30,6 @@ import UserSettingsRouter from "./routes/UserSettings";
 
   app.get("/", async (req, res) => {
     res.send("hello");
-  });
-
-  app.get("/greet", async (req, res) => {
-    res.send(await stateUserPlace(req.query.nickname?.toString() || ""));
   });
 
   app.use(HelloWorldRouter);
