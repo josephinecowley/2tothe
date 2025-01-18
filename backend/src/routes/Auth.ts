@@ -3,6 +3,8 @@ import { applyRoute } from "./applyRoute";
 import { ErrorCode, ResponseError, Routes } from "@2tothe/shared";
 import { sendSMSCode } from "../db/auth/sendSMSCode";
 import passport from "passport";
+import { IUserWithID } from "../db/auth/extendExpress";
+import { authenticateSMS, InvalidOTPMessage } from "../db/auth/smsStrategy";
 
 const router = express.Router();
 
@@ -16,12 +18,10 @@ applyRoute(router, Routes.Auth.sendSMSCodeRoute).use(async (body) => {
   }
 });
 
-applyRoute(router, Routes.Auth.verifySMSCodeRoute, passport.authenticate("sms")).use(async (body, req) => {
-  const user = req.user;
-  if (!user) {
-    throw new ResponseError(401, ErrorCode.Unauthorized, "Unauthorized");
-  }
-  return { user };
+applyRoute(router, Routes.Auth.verifySMSCodeRoute).use(async (_, req) => {
+  return await new Promise<{ user: IUserWithID }>((resolve, reject) => {
+    authenticateSMS(req, resolve, reject);
+  });
 });
 
 export default router;
