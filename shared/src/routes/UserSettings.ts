@@ -9,7 +9,7 @@ export const setUserPlaceRoute: Route<{ userID: string; newPlaceID: string }, { 
 };
 
 export const setUserNicknameRoute: Route<{ userID: string; newNickname: string }, { success: boolean }> = {
-  path: "/user-settings.set-user-nickname",
+  path: "/user-settings/set-user-nickname",
   method: "post",
   req: z.object({ userID: z.string().uuid(), newNickname: z.string() }),
   res: z.object({ success: z.boolean() }),
