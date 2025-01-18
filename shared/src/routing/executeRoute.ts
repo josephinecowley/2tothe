@@ -47,7 +47,7 @@ export async function executeRoute<RouteReq, RouteRes>(
   const { status, ok } = response;
   const jsonRaw = await response.json();
 
-  if (!ok) return { status, ok, error: jsonRaw };
+  if (!ok) return { status, ok, error: jsonRaw as IResponseError };
 
   const json = await route.res.parseAsync(jsonRaw);
   return { status, ok, json };
