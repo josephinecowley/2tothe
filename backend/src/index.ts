@@ -4,6 +4,7 @@ import "reflect-metadata";
 import dataSource from "./db/dataSource";
 
 import express from "express";
+import cors from "cors";
 
 import { stateUserPlace } from "./controllers/User";
 import HelloWorldRouter from "./routes/HelloWorld";
@@ -11,6 +12,18 @@ import HelloWorldRouter from "./routes/HelloWorld";
 (async function () {
   await dataSource.initialize();
   const app = express();
+
+  const FRONTEND_URL = process.env.FRONTEND_URL;
+  if (!FRONTEND_URL) {
+    throw new Error("process.env.FRONTEND_URL is not set");
+  }
+
+  app.use(
+    cors({
+      origin: FRONTEND_URL,
+      credentials: true,
+    }),
+  );
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
