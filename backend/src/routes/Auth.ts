@@ -2,6 +2,7 @@ import express from "express";
 import { applyRoute } from "./applyRoute";
 import { ErrorCode, ResponseError, Routes } from "@2tothe/shared";
 import { sendSMSCode } from "../db/auth/sendSMSCode";
+import passport from "passport";
 
 const router = express.Router();
 
@@ -13,6 +14,10 @@ applyRoute(router, Routes.Auth.sendSMSCodeRoute).use(async (body) => {
   } catch (e) {
     throw new ResponseError(500, ErrorCode.SMSSendFail, "Failed to send SMS code");
   }
+});
+
+applyRoute(router, Routes.Auth.verifySMSCodeRoute, passport.authenticate("sms")).use(async (body, req) => {
+  return { user: req.user };
 });
 
 export default router;
