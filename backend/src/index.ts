@@ -1,3 +1,9 @@
-const x: string = "Hello World!"
+import express from "express"
 
-console.log(x)
+const app = express()
+
+app.get("/", (req, res) => {
+    res.send("hello");
+})
+
+app.listen(8080)
