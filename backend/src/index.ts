@@ -14,6 +14,7 @@ import "./auth/passportSerialize";
 import HelloWorldRouter from "./routes/HelloWorld";
 import UserSettingsRouter from "./routes/UserSettings";
 import AuthRouter from "./routes/Auth";
+import UserAnswersRouter from "./routes/UserAnswers";
 
 (async function () {
   await dataSource.initialize();
@@ -58,6 +59,7 @@ import AuthRouter from "./routes/Auth";
   app.use(HelloWorldRouter);
   app.use(UserSettingsRouter);
   app.use(AuthRouter);
+  app.use(UserAnswersRouter);
 
   const PORT = Number(process.env.PORT) || 8080;
   app.listen(PORT, () => {
