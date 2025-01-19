@@ -12,6 +12,6 @@ export class Place extends BaseEntity {
   @Column()
   population!: number;
 
-  @ManyToMany(() => Question, (q) => q.places)
+  @ManyToMany(() => Question, (q) => q.whitelistedPlaces)
   whitelistedQuestions!: Question[];
 }
