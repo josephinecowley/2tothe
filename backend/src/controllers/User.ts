@@ -9,7 +9,7 @@ async function findUserByID(userID: User["id"]) {
 }
 
 async function findQuestionByID(questionID: Question["id"]) {
-  return await User.findOne({ where: { id: questionID } });
+  return await Question.findOne({ where: { id: questionID } });
 }
 
 export async function setUserPlace(userID: User["id"], newPlaceID: Place["id"]) {
