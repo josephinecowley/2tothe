@@ -15,6 +15,7 @@ import HelloWorldRouter from "./routes/HelloWorld";
 import UserSettingsRouter from "./routes/UserSettings";
 import AuthRouter from "./routes/Auth";
 import UserAnswersRouter from "./routes/UserAnswers";
+import Question from "./routes/Question";
 
 (async function () {
   await dataSource.initialize();
@@ -60,6 +61,7 @@ import UserAnswersRouter from "./routes/UserAnswers";
   app.use(UserSettingsRouter);
   app.use(AuthRouter);
   app.use(UserAnswersRouter);
+  app.use(Question);
 
   const PORT = Number(process.env.PORT) || 8080;
   app.listen(PORT, () => {
