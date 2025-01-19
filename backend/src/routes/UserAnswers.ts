@@ -6,7 +6,7 @@ import { setUserAnswer } from "../controllers/User";
 const router = Router();
 
 applyRoute(router, Routes.UserAnswers.setUserAnswerRoute).use(async (body) => {
-  const result = await setUserAnswer(body.answer, body.questionID, body.userID);
+  const result = await setUserAnswer(body.answer, body.questionID, body.userID, body.isOverride);
   if (result.errorCode) {
     throw new ResponseError(404, result.errorCode, result.message);
   }
