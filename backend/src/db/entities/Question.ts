@@ -18,6 +18,6 @@ export class Question extends BaseEntity {
 
   @ManyToMany(() => Place, (p) => p.whitelistedQuestions)
   @JoinTable()
-  places!: Place[];
+  whitelistedPlaces!: Place[];
   // TODO: add tags / topics
 }

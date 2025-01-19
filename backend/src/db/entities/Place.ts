@@ -1,5 +1,6 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
 import { Question } from "./Question";
+import { ScheduledQuestion } from "./ScheduledQuestion";
 
 @Entity()
 export class Place extends BaseEntity {
@@ -12,6 +13,6 @@ export class Place extends BaseEntity {
   @Column()
   population!: number;
 
-  @ManyToMany(() => Question, (q) => q.places)
+  @ManyToMany(() => Question, (q) => q.whitelistedPlaces)
   whitelistedQuestions!: Question[];
 }
