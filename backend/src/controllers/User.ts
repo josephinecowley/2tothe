@@ -54,7 +54,12 @@ export async function setUserNickname(userID: User["id"], newNickname: User["nic
   };
 }
 
-export async function setUserAnswer(answer: UserAnswer["answer"], questionID: Question["id"], userID: User["id"]) {
+export async function setUserAnswer(
+  answer: UserAnswer["answer"],
+  questionID: Question["id"],
+  userID: User["id"],
+  isOverride: boolean = false,
+) {
   const user = await findUserByID(userID);
   if (!user) {
     return {
@@ -71,7 +76,25 @@ export async function setUserAnswer(answer: UserAnswer["answer"], questionID: Qu
     };
   }
 
-  const newUserAnswer = UserAnswer.create({
+  const currUserAnswer = await UserAnswer.findOne({ where: { question: { id: question.id }, user: { id: user.id } } });
+  if (currUserAnswer) {
+    if (isOverride) {
+      currUserAnswer.answer = answer;
+
+      await currUserAnswer.save();
+
+      return {
+        message: `User answer was updated to ${currUserAnswer.answer}`,
+      };
+    } else {
+      return {
+        errorCode: ErrorCode.AlreadyExists,
+        message: `Answer to this question already exists.`,
+      };
+    }
+  }
+
+  const newUserAnswer = await UserAnswer.create({
     answer,
     question,
     user,
@@ -80,6 +103,6 @@ export async function setUserAnswer(answer: UserAnswer["answer"], questionID: Qu
   await newUserAnswer.save();
 
   return {
-    message: `User answer was updated to ${newUserAnswer.answer}`,
+    message: `User answer was created and set to ${newUserAnswer.answer}`,
   };
 }
