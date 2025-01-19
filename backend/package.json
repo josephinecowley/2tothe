@@ -11,6 +11,9 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "overrides": {
+    "ajv": "^8.17.1"
+  },
   "dependencies": {
     "@2tothe/shared": "file:../shared",
     "cors": "^2.8.5",
