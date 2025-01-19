@@ -9,7 +9,7 @@ import express from "express";
 import cors from "cors";
 
 import { useSmsStrategy } from "./auth/smsStrategy";
-import "./db/auth/passportSerialize";
+import "./auth/passportSerialize";
 
 import HelloWorldRouter from "./routes/HelloWorld";
 import UserSettingsRouter from "./routes/UserSettings";

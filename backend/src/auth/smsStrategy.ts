@@ -1,10 +1,10 @@
 import passport from "passport";
-import { User } from "../entities/User";
 import { Strategy as CustomStrategy } from "passport-custom";
 import { client } from "./twilioClient";
 import { IUserWithID } from "./extendExpress";
 import { ErrorCode, ResponseError } from "@2tothe/shared";
-import { NewUser } from "../entities";
+import { User } from "../db/entities/User";
+import { NewUser } from "../db/entities/NewUser";
 
 export const InvalidOTPMessage = "Invalid OTP";
 

@@ -1,7 +1,7 @@
 import passport from "passport";
-import { User } from "../entities/User";
+import { User } from "../db/entities/User";
+import { NewUser } from "../db/entities/NewUser";
 import "./extendExpress";
-import { NewUser } from "../entities";
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
