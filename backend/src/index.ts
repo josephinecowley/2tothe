@@ -8,7 +8,7 @@ import dataSource from "./db/dataSource";
 import express from "express";
 import cors from "cors";
 
-import { useSmsStrategy } from "./db/auth/smsStrategy";
+import { useSmsStrategy } from "./auth/smsStrategy";
 import "./db/auth/passportSerialize";
 
 import HelloWorldRouter from "./routes/HelloWorld";

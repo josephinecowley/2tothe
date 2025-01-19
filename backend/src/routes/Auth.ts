@@ -1,10 +1,10 @@
 import express from "express";
 import { applyRoute } from "./applyRoute";
 import { ErrorCode, ResponseError, Routes } from "@2tothe/shared";
-import { sendSMSCode } from "../db/auth/sendSMSCode";
+import { sendSMSCode } from "../auth/sendSMSCode";
 import passport from "passport";
-import { IUserWithID } from "../db/auth/extendExpress";
-import { authenticateSMS, InvalidOTPMessage } from "../db/auth/smsStrategy";
+import { IUserWithID } from "../auth/extendExpress";
+import { authenticateSMS, InvalidOTPMessage } from "../auth/smsStrategy";
 
 const router = express.Router();
 
