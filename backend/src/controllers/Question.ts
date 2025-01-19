@@ -15,9 +15,7 @@ export async function GetCurrentQuestionForPlace(placeID: string) {
   const scheduledQuestion = await ScheduledQuestion.createQueryBuilder("scheduledQuestion")
     .innerJoinAndSelect("scheduledQuestion.whitelistedPlaces", "place")
     .where("place.id = :placeID", { placeID })
-    .orWhere(
-      "NOT EXISTS (SELECT 1 FROM scheduled_question_whitelisted_places sqwp WHERE sqwp.scheduledQuestionId = scheduledQuestion.id)",
-    )
+    .orWhere("NOT EXISTS (SELECT 1 FROM scheduled_question_whitelisted_places_place sqwp)")
     .orderBy("scheduledQuestion.date", "DESC")
     .getOne();
 
