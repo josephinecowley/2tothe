@@ -5,4 +5,5 @@ export enum ErrorCode {
   Unauthorized = "E_UNAUTHORIZED",
   NotFound = "E_NOT_FOUND",
   SMSSendFail = "E_SMS_SEND_FAIL",
+  AlreadyExists = "E_EXISTS",
 }
