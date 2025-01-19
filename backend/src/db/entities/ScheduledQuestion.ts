@@ -1,8 +1,8 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
 import { Question } from "./Question";
 
 @Entity()
-export class QuestionSchedule extends BaseEntity {
+export class ScheduledQuestion extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
