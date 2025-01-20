@@ -54,7 +54,7 @@ import { getSomeAnswerableQuestionsForUser } from "./controllers/Question";
   app.use(passport.initialize());
   app.use(passport.session());
 
-  await getSomeAnswerableQuestionsForUser("d6b2ac8d-4692-4cf7-830b-98f4736ebc9b", 10);
+  // console.dir(await getSomeAnswerableQuestionsForUser("d6b2ac8d-4692-4cf7-830b-98f4736ebc9b", 10));
   app.get("/", async (req, res) => {
     res.send("hello");
   });

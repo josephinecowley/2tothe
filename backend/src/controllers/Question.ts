@@ -33,16 +33,16 @@ export async function getSomeAnswerableQuestionsForUser(userID: User["id"], numb
 
   const answerableQuestions = await Question.createQueryBuilder("question")
     // Filter out questions not for user's place
-    .leftJoinAndSelect("question.whitelistedPlaces", "whitelisted_place")
+    .leftJoin("question.whitelistedPlaces", "whitelisted_place")
     .where("(whitelisted_place.id IS NULL OR whitelisted_place.id = :placeID)", { placeID })
 
     // Find all questions which have not been answered by user
-    .leftJoinAndSelect("question.userAnswers", "ua_for_user", "ua_for_user.userId = :userID", { userID })
+    .leftJoin("question.userAnswers", "ua_for_user", "ua_for_user.userId = :userID", { userID })
     .andWhere("ua_for_user.id IS NULL")
 
     // Filter for questions which are timeless OR are in the past of the user's place
-    .leftJoinAndSelect("question.scheduledQuestions", "sq", "sq.placeID = :placeID", { placeID })
-    .andWhere("(sq.dateTime <= :now) OR (question.timeless IS TRUE)", { now })
+    .leftJoin("question.scheduledQuestions", "sq", "sq.placeID = :placeID", { placeID })
+    .andWhere("(sq.dateTime <= :now OR question.timeless IS TRUE)", { now })
 
     .take(numberOfQuestions)
     .getMany();
