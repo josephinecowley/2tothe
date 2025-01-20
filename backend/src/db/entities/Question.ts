@@ -2,6 +2,7 @@ import { BaseEntity, Entity, ManyToMany, PrimaryGeneratedColumn, Column, JoinTab
 
 import { Place } from "./Place";
 import { ScheduledQuestion } from "./ScheduledQuestion";
+import { UserAnswer } from "./UserAnswer";
 
 @Entity()
 export class Question extends BaseEntity {
@@ -24,6 +25,9 @@ export class Question extends BaseEntity {
 
   @OneToMany(() => ScheduledQuestion, (q) => q.question)
   scheduledQuestions!: ScheduledQuestion[];
+
+  @OneToMany(() => UserAnswer, (ua) => ua.question)
+  userAnswers!: UserAnswer[];
 
   @Column({ default: false })
   timeless!: boolean;

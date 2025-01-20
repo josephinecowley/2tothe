@@ -16,6 +16,7 @@ import UserSettingsRouter from "./routes/UserSettings";
 import AuthRouter from "./routes/Auth";
 import UserAnswersRouter from "./routes/UserAnswers";
 import Question from "./routes/Question";
+import { getSomeAnswerableQuestionsForUser } from "./controllers/Question";
 
 (async function () {
   await dataSource.initialize();
@@ -53,6 +54,7 @@ import Question from "./routes/Question";
   app.use(passport.initialize());
   app.use(passport.session());
 
+  await getSomeAnswerableQuestionsForUser("d6b2ac8d-4692-4cf7-830b-98f4736ebc9b", 10);
   app.get("/", async (req, res) => {
     res.send("hello");
   });
