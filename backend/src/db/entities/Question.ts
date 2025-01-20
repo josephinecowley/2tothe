@@ -3,9 +3,10 @@ import { BaseEntity, Entity, ManyToMany, PrimaryGeneratedColumn, Column, JoinTab
 import { Place } from "./Place";
 import { ScheduledQuestion } from "./ScheduledQuestion";
 import { UserAnswer } from "./UserAnswer";
+import { Types } from "@2tothe/shared";
 
 @Entity()
-export class Question extends BaseEntity {
+export class Question extends BaseEntity implements Types.IBaseQuestion {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
