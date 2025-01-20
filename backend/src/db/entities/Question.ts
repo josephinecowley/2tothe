@@ -1,9 +1,12 @@
-import { BaseEntity, Entity, ManyToMany, PrimaryGeneratedColumn, Column, JoinTable } from "typeorm";
+import { BaseEntity, Entity, ManyToMany, PrimaryGeneratedColumn, Column, JoinTable, OneToMany } from "typeorm";
 
 import { Place } from "./Place";
+import { ScheduledQuestion } from "./ScheduledQuestion";
+import { UserAnswer } from "./UserAnswer";
+import { Types } from "@2tothe/shared";
 
 @Entity()
-export class Question extends BaseEntity {
+export class Question extends BaseEntity implements Types.IBaseQuestion {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
@@ -20,6 +23,12 @@ export class Question extends BaseEntity {
   @JoinTable()
   whitelistedPlaces!: Place[];
   // TODO: add tags / topics
+
+  @OneToMany(() => ScheduledQuestion, (q) => q.question)
+  scheduledQuestions!: ScheduledQuestion[];
+
+  @OneToMany(() => UserAnswer, (ua) => ua.question)
+  userAnswers!: UserAnswer[];
 
   @Column({ default: false })
   timeless!: boolean;
