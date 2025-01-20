@@ -13,8 +13,8 @@ applyRoute(router, Routes.Question.getMostRecentQuestionForPlaceRoute).use(async
   return { questionID: result.mostRecentQuestionID };
 });
 
-applyRoute(router, Routes.Question.getSomeAnswerableQuestionsForUserRoute).use(async (body) => {
-  const result = await Question.getSomeAnswerableQuestionsForUser(body.userID, body.count);
+applyRoute(router, Routes.Question.getAnswerableQuestionsForUserRoute).use(async (body) => {
+  const result = await Question.getAnswerableQuestionsForUser(body.userID, body.count);
   if (result.errorCode) {
     throw new ResponseError(404, result.errorCode, result.message);
   }

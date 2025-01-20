@@ -19,7 +19,7 @@ export async function getMostRecentQuestionForPlace(placeID: Place["id"]) {
   return { mostRecentQuestionID: mostRecentScheduledQuestion.questionID };
 }
 
-export async function getSomeAnswerableQuestionsForUser(userID: User["id"], count: number) {
+export async function getAnswerableQuestionsForUser(userID: User["id"], count: number) {
   const now = new Date();
   const user = await User.findOne({ where: { id: userID }, relations: { place: true } });
   if (!user) {
