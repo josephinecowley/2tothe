@@ -1,6 +1,7 @@
-import { BaseEntity, Entity, ManyToMany, PrimaryGeneratedColumn, Column, JoinTable } from "typeorm";
+import { BaseEntity, Entity, ManyToMany, PrimaryGeneratedColumn, Column, JoinTable, OneToMany } from "typeorm";
 
 import { Place } from "./Place";
+import { ScheduledQuestion } from "./ScheduledQuestion";
 
 @Entity()
 export class Question extends BaseEntity {
@@ -20,6 +21,9 @@ export class Question extends BaseEntity {
   @JoinTable()
   whitelistedPlaces!: Place[];
   // TODO: add tags / topics
+
+  @OneToMany(() => ScheduledQuestion, (q) => q.question)
+  scheduledQuestions!: ScheduledQuestion[];
 
   @Column({ default: false })
   timeless!: boolean;
