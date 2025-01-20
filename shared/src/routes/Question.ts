@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { Route } from "../routing";
 import { Types } from "..";
-import { ZodBaseQuestion } from "../types";
 
 export const getMostRecentQuestionForPlaceRoute: Route<{ placeID: string }, { questionID: string }> = {
   path: "/question/get-most-recent-question-for-place",

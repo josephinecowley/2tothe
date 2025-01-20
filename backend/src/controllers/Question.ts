@@ -47,5 +47,5 @@ export async function getSomeAnswerableQuestionsForUser(userID: User["id"], coun
     .take(count)
     .getMany();
 
-  return answerableQuestions;
+  return { questions: answerableQuestions };
 }
